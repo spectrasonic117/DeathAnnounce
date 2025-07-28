@@ -1,0 +1,2 @@
+death-messages-enabled: true
+death-message: "<red><b>{player}</b></red> ha muerto"
