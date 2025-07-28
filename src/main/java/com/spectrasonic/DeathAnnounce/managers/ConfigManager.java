@@ -30,13 +30,17 @@ public class ConfigManager {
         loadConfig();
     }
 
-    public void loadConfig() {
+    public void saveDefaultConfig() {
         if (configFile == null) {
             configFile = new File(plugin.getDataFolder(), "config.yml");
         }
         if (!configFile.exists()) {
             plugin.saveResource("config.yml", false);
         }
+    }
+
+    public void loadConfig() {
+        saveDefaultConfig();
         config = YamlConfiguration.loadConfiguration(configFile);
         
         deathMessage = config.getString("death-message", "<red><b>{player}</b></red> ha muerto");
@@ -44,7 +48,9 @@ public class ConfigManager {
     }
 
     public void reloadConfig() {
-        loadConfig();
+        config = YamlConfiguration.loadConfiguration(configFile);
+        deathMessage = config.getString("death-message", "<red><b>{player}</b></red> ha muerto");
+        deathMessagesEnabled = config.getBoolean("death-messages-enabled", true);
     }
 
     public void saveConfig() {
