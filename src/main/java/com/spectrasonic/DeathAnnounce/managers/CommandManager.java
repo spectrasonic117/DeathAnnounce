@@ -12,6 +12,7 @@ public class CommandManager {
 
     public void registerCommands() {
         commandManager = new PaperCommandManager(plugin);
+        commandManager.getCommandCompletions().registerStaticCompletion("onoff", "on|off");
         commandManager.registerCommand(new DeathAnnounceCommand(plugin));
     }
 

@@ -5,15 +5,19 @@ import com.spectrasonic.Utils.MessageUtils;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
+import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.Subcommand;
-import lombok.RequiredArgsConstructor;
 import org.bukkit.command.CommandSender;
 
-@RequiredArgsConstructor
 @CommandAlias("deathannounce|da")
 @CommandPermission("deathannounce.admin")
 public class DeathAnnounceCommand extends BaseCommand {
+
     private final Main plugin;
+
+    public DeathAnnounceCommand(Main plugin) {
+        this.plugin = plugin;
+    }
 
     @Subcommand("reload")
     public void onReload(CommandSender sender) {
@@ -22,6 +26,7 @@ public class DeathAnnounceCommand extends BaseCommand {
     }
 
     @Subcommand("toggle")
+    @CommandCompletion("onoff")
     public void onToggle(CommandSender sender, String state) {
         boolean enabled = state.equalsIgnoreCase("on");
         plugin.getConfigManager().setDeathMessagesEnabled(enabled);

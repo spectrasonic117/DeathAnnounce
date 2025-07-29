@@ -18,8 +18,8 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        this.configManager = new ConfigManager(this);
         this.commandManager = new CommandManager(this);
+        this.configManager = new ConfigManager(this);
         this.eventManager = new EventManager(this);
         
         
