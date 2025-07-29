@@ -4,11 +4,6 @@ main: com.spectrasonic.DeathAnnounce.Main
 api-version: '1.21'
 authors: [Spectrasonic]
 
-commands:
-  deathannounce:
-    aliases: [da]
-    permission: deathannounce.admin
-
 permissions:
-  deathannounce.admin:
-    default: op
+    deathannounce.admin:
+        default: op

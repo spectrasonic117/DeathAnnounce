@@ -1,14 +1,12 @@
-// ConfigManager.java (updated with setter)
 package com.spectrasonic.DeathAnnounce.managers;
 
 import com.spectrasonic.DeathAnnounce.Main;
 import lombok.Getter;
 import lombok.Setter;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +17,7 @@ public class ConfigManager {
     private FileConfiguration config;
     
     @Getter
-    private String deathMessage;
+    private Component deathMessage;
     
     @Getter
     @Setter
@@ -43,13 +41,13 @@ public class ConfigManager {
         saveDefaultConfig();
         config = YamlConfiguration.loadConfiguration(configFile);
         
-        deathMessage = config.getString("death-message", "<red><b>{player}</b></red> ha muerto");
+        deathMessage = MiniMessage.miniMessage().deserialize(config.getString("death-message", "<red><b>{player}</b></red> ha muerto"));
         deathMessagesEnabled = config.getBoolean("death-messages-enabled", true);
     }
 
     public void reloadConfig() {
         config = YamlConfiguration.loadConfiguration(configFile);
-        deathMessage = config.getString("death-message", "<red><b>{player}</b></red> ha muerto");
+        deathMessage = MiniMessage.miniMessage().deserialize(config.getString("death-message", "<red><b>{player}</b></red> ha muerto"));
         deathMessagesEnabled = config.getBoolean("death-messages-enabled", true);
     }
 
@@ -62,10 +60,7 @@ public class ConfigManager {
         }
     }
 
-    public String formatDeathMessage(String playerName) {
-        return MiniMessage.miniMessage().serialize(
-            MiniMessage.miniMessage().deserialize(deathMessage, 
-                Placeholder.unparsed("player", playerName))
-        );
+    public Component formatDeathMessage(String playerName) {
+        return deathMessage.replaceText(builder -> builder.matchLiteral("{player}").replacement(Component.text(playerName)));
     }
 }

@@ -8,12 +8,13 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class DeathAnnounceCommand {
+
     private final Main plugin;
 
     public CommandAPICommand build() {
         return new CommandAPICommand("deathannounce")
             .withAliases("da")
-            .withPermission("deathannounce.admin")
+                .withPermission("deathannounce.admin")
             .withSubcommand(
                 new CommandAPICommand("reload")
                     .executes((sender, args) -> {
@@ -29,7 +30,7 @@ public class DeathAnnounceCommand {
                                     boolean enabled = state.equalsIgnoreCase("on");
                         
                         plugin.getConfigManager().setDeathMessagesEnabled(enabled);
-                        MessageUtils.sendMessage(sender, "<green>Death messages " + (enabled ? "enabled" : "disabled") + "!</green>");
+                        MessageUtils.sendMessage(sender, "<dark_gray>Death messages " + (enabled ? "<green>enabled</green>" : "<red>disabled</red>") + "!</dark_gray>");
                     })
             );
     }

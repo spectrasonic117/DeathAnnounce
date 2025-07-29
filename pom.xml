@@ -5,7 +5,7 @@
 
         <groupId>com.spectrasonic</groupId>
         <artifactId>DeathAnnounce</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.1-SNAPSHOT</version>
         <packaging>jar</packaging>
 
         <properties>
@@ -56,6 +56,12 @@
                 <artifactId>commandapi-bukkit-core</artifactId>
                 <version>${commandapi.version}</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>dev.jorel</groupId>
+                <artifactId>commandapi-bukkit-shade</artifactId>
+                <version>${commandapi.version}</version>
             </dependency>
 
             <!-- Lombok -->
@@ -116,6 +122,13 @@
                         <finalName>${project.artifactId}-${project.version}</finalName>
                         <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
                         <shadedArtifactAttached>true</shadedArtifactAttached>
+                        <minimizeJar>true</minimizeJar>
+                        <relocations>
+                            <relocation>
+                                <pattern>dev.jorel.commandapi</pattern>
+                                <shadedPattern>com.spectrasonic.commandapi</shadedPattern>
+                            </relocation>
+                        </relocations>
                     </configuration>
                     <executions>
                         <execution>

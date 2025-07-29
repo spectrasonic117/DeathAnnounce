@@ -122,12 +122,11 @@ public final class MessageUtils {
         //     2, 40, 2
         // );
 
-    public static void broadcastActionBar(String message) {
-        final Component component = miniMessage.deserialize(message);
+    public static void broadcastActionBar(Component component) {
         Bukkit.getOnlinePlayers().forEach(player -> player.sendActionBar(component));
     }
 
     // Uso Broadcast ActionBAR
-    // MiniMessageUtils.broadcastActionBar("<yellow>¡Evento e…special activado!</yellow>");
+    // MiniMessageUtils.broadcastActionBar(Component.text("<yellow>¡Evento especial activado!</yellow>"));
 
 }
