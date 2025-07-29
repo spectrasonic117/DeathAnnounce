@@ -8,13 +8,13 @@ import org.bukkit.Sound;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class EventManager implements Listener {
+    
     private final Main plugin;
 
-    {
+    public EventManager(Main plugin) {
+        this.plugin = plugin;
         registerEvents();
     }
 
